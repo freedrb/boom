@@ -1,10 +1,11 @@
 'use strict';
-export class  Classification{
-    constructor(ClaName=``,ClaRemark=``,ClaChild=[],ClaCount=0){
+ class  Classification{
+    constructor(ClaName=`test`,ClaRemark=`tests`,Child=[],ClaCount=0){
         this.ClaName=ClaName;
         this.ClaRemark=ClaRemark;
-        this.ClaChild=ClaChild;
+        this.Child=Child;
         this.ClaId=ClaCount;
+        this.parent=null;
     }
     
 }

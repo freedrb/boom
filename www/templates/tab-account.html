@@ -1,24 +1,7 @@
-<!--
-  This template loads for the 'tab.friend-detail' state (app.js)
-  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
-  The FriendsCtrl pulls data from the Friends service (service.js)
-  The Friends service returns an array of friend data
--->
 <ion-view view-title="{{chat.name}}">
-   <!--<ion-nav-buttons side="left">
-     <div class="buttons">
-      <button class="button" ng-click="pre()">
-        pre
-      </button>
-      <div>
-      <div class="buttons">
-       
-      <div class="buttons">
-       
-      </div>
-    </ion-nav-buttons>-->
+
     <ion-nav-title>
-				<img src="img/firefox-logo.png" style="height:100%">
+				{{ current.AccName }}
 			</ion-nav-title>
             <ion-nav-buttons side="primary">
                 <button class="button" ng-click="pre(current)">
@@ -59,7 +42,7 @@
             Edit
           </ion-option-button>
           <ion-option-button class="button-calm"
-                             ng-click="share(item)">
+                             ng-click="onItemDelete(item)">
             delete
           </ion-option-button>
           <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
