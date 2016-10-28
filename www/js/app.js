@@ -59,8 +59,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-    .state('tab.balance.create', {
-      url: '/balance/create',
+    .state('tab.create', {
+      url: '/create',
       views: {
         'tab-balance': {
           templateUrl: 'templates/balance-create.html',
@@ -68,8 +68,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-   .state('tab.balance.edit', {
-      url: '/balance/edit:Id',
+   .state('tab.edit', {
+      url: '/edit:Id',
       views: {
         'tab-balance': {
           templateUrl: 'templates/balance-create.html',

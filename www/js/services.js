@@ -109,16 +109,16 @@ angular.module('starter.services', [])
   }
  
 })
-.factory('BalManager', function() {
+.factory('Classify', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  localStorage.BalId=localStorage.BalId || 0;
- localStorage.BalData || (localStorage.BalData=angular.toJson(new Balssification()));
+  localStorage.ClaId=localStorage.ClaId || 0;
+ localStorage.ClaData || (localStorage.ClaData=angular.toJson(new Classification()));
  let synchronize=function(){
                  let temp={};
-            angular.copy(BalData,temp);
-            localStorage.BalData=angular.toJson(function(pare){
+            angular.copy(ClaData,temp);
+            localStorage.ClaData=angular.toJson(function(pare){
 		pare.Child.i || (pare.Child.i=0);
 			while(pare.Child.i < pare.Child.length){
 				let e = pare.Child[pare.Child.i];
@@ -133,7 +133,7 @@ angular.module('starter.services', [])
 	}(temp));
  }
    
-    var BalData=function(pare){
+    var ClaData=function(pare){
 		pare.Child.i || (pare.Child.i=0);
 			while(pare.Child.i < pare.Child.length){
 				let e = pare.Child[pare.Child.i];
@@ -146,17 +146,17 @@ angular.module('starter.services', [])
 			pare.Child.i = null ;
 
             return pare; 			
-	}(angular.fromJson(localStorage.BalData));
+	}(angular.fromJson(localStorage.ClaData));
 
   return {
 
     get: function() {     
-      return BalData;;
+      return ClaData;;
     },
 
     create:function(name=`test`,remark=`test`){
-        localStorage.BalId=Number(localStorage.BalId) +1;
-       return new Balssification(name,remark,[],localStorage.BalId);
+        localStorage.ClaId=Number(localStorage.ClaId) +1;
+       return new Classification(name,remark,[],localStorage.ClaId);
     },
  
    add:function(pare,Child){
@@ -181,13 +181,13 @@ angular.module('starter.services', [])
 
 
     find:function(pare,Id){
-        return pare.Child.find((element,index,array)=>Id===element.AccId);
+        return pare.Child.find((element,index,array)=>Id===element.ClaId);
     },
 
 
     update:function(pare,name = ``,remark = ``){
-        pare.AccName    = name;
-        pare.Accremark  = remark;
+        pare.ClaName    = name;
+        pare.ClaRemark  = remark;
             synchronize();
         return pare;
     },
@@ -201,6 +201,8 @@ angular.module('starter.services', [])
   }
  
 })
+
+
 
 .factory('BalManager', function() {
   // Might use a resource here that returns a JSON array
@@ -224,7 +226,7 @@ angular.module('starter.services', [])
 
     create:function(name=``,classify,account,money,time=new Date().getDate,remark=``){
         localStorage.BalId=Number(localStorage.BalId) +1;
-       return new Balssification(name,classify ,account,money,time,remark, localStorage.BalId);
+       return new Classification(name,classify ,account,money,time,remark, localStorage.BalId);
     },
  
    add:function(item){

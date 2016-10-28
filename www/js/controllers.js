@@ -149,7 +149,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('ClassifyCtrl', function($scope,$ionicPopup, $timeout, Classifiy) {
+.controller('ClassifyCtrl', function($scope,$ionicPopup, $timeout, Classify) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -158,7 +158,7 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.Item = Classifiy.get();
+  $scope.Item = Classify.get();
   console.log($scope.Item);
   $scope.current=$scope.Item;
   $scope.items=$scope.current.Child;
@@ -176,11 +176,11 @@ angular.module('starter.controllers', [])
 
   
   $scope.moveItem = function(item, fromIndex, toIndex) {
-   Classifiy.moveItem($scope.current,item, fromIndex, toIndex);
+   Classify.moveItem($scope.current,item, fromIndex, toIndex);
   };
   
   $scope.onItemDelete = function(item) {
-     Classifiy.remov($scope.current,item);
+     Classify.remov($scope.current,item);
   };
 
     // 触发一个按钮点击，或一些其他目标
@@ -240,9 +240,9 @@ angular.module('starter.controllers', [])
          type: 'button-positive',
          onTap: function(e) {
 
-           let n=Classifiy.create($scope.data1.ClaName,$scope.data1.ClaRemark);
+           let n=Classify.create($scope.data1.ClaName,$scope.data1.ClaRemark);
            console.log(n);
-           Classifiy.add(item,n);
+           Classify.add(item,n);
            }
          },
      ]
