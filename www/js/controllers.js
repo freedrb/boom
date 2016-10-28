@@ -1,6 +1,42 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('BalanceCtrl', function($scope,BalManager) {
+  $scope.Item=BalManager.get();
+  console.log($scope.Item);
+
+   $scope.moveItem = function(item, fromIndex, toIndex) {
+   BalManager.moveItem(item, fromIndex, toIndex);
+  };
+  
+  $scope.onItemDelete = function(item) {
+    BalManager.remov(item);
+    
+  };
+  $scope.add=function(){
+    alert(11);
+    console.log($location);
+    $location.path("/tab/create");
+  }
+
+})
+.controller('BalCreateCtrl', function($scope, BalManager) {
+
+  $scope.Item=BalManager.get();
+  $scope.Bal=BalManager.create();
+  $scope.save=function(){
+     BalManager.add($scope.Bal);
+     $state.go("balance");
+   }
+
+})
+.controller('BalEditCtrl', function($scope,$stateParams,BalManager) {
+  $scope.Item=BalManager.get();
+   $scope.Bal=BalManager.find($stateParams.Id);
+   $scope.save=function(){
+     
+   }
+
+})
 
 .controller('AccountCtrl', function($scope,$ionicPopup, $timeout, Account) {
   // With the new view caching in Ionic, Controllers are only called
@@ -112,11 +148,8 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
 
-.controller('ChatsCtrl', function($scope,$ionicPopup, $timeout, Classifiy) {
+.controller('ClassifyCtrl', function($scope,$ionicPopup, $timeout, Classifiy) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),

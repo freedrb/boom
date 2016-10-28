@@ -1,0 +1,49 @@
+<ion-view view-title="{{chat.name}}">
+
+    <ion-nav-title>
+				balance
+			</ion-nav-title>
+            <ion-nav-buttons side="primary">
+                <button class="button" ng-click="pre(current)">
+                   pre
+                </button>
+            </ion-nav-buttons>
+
+            <ion-nav-buttons side="secondary">
+              
+          <div><a href="#/tab/balance/create">
+           create
+          </a>
+           </div>
+      
+   
+            </ion-nav-buttons>
+     
+    <ion-content>
+
+      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+      
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+        <ion-item ng-repeat="item in items" 
+                  item="item"
+                  href="#/balance/edit/{{item.BalId}}"  class="item-remove-animate">
+          {{ item.BalName }} 
+          <ion-delete-button class="ion-minus-circled" 
+                             ng-click="onItemDelete(item)">
+          </ion-delete-button>
+          <ion-option-button class="button-assertive"
+                             ng-click="edit(item)">
+            Edit
+          </ion-option-button>
+          <ion-option-button class="button-calm"
+                             ng-click="onItemDelete(item)">
+            delete
+          </ion-option-button>
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
+</ion-view>

@@ -109,16 +109,16 @@ angular.module('starter.services', [])
   }
  
 })
-.factory('Classifiy', function() {
+.factory('BalManager', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  localStorage.ClaId=localStorage.ClaId || 0;
- localStorage.ClaData || (localStorage.ClaData=angular.toJson(new Classification()));
+  localStorage.BalId=localStorage.BalId || 0;
+ localStorage.BalData || (localStorage.BalData=angular.toJson(new Balssification()));
  let synchronize=function(){
                  let temp={};
-            angular.copy(ClaData,temp);
-            localStorage.ClaData=angular.toJson(function(pare){
+            angular.copy(BalData,temp);
+            localStorage.BalData=angular.toJson(function(pare){
 		pare.Child.i || (pare.Child.i=0);
 			while(pare.Child.i < pare.Child.length){
 				let e = pare.Child[pare.Child.i];
@@ -133,7 +133,7 @@ angular.module('starter.services', [])
 	}(temp));
  }
    
-    var ClaData=function(pare){
+    var BalData=function(pare){
 		pare.Child.i || (pare.Child.i=0);
 			while(pare.Child.i < pare.Child.length){
 				let e = pare.Child[pare.Child.i];
@@ -146,17 +146,17 @@ angular.module('starter.services', [])
 			pare.Child.i = null ;
 
             return pare; 			
-	}(angular.fromJson(localStorage.ClaData));
+	}(angular.fromJson(localStorage.BalData));
 
   return {
 
     get: function() {     
-      return ClaData;;
+      return BalData;;
     },
 
     create:function(name=`test`,remark=`test`){
-        localStorage.ClaId=Number(localStorage.ClaId) +1;
-       return new Classification(name,remark,[],localStorage.ClaId);
+        localStorage.BalId=Number(localStorage.BalId) +1;
+       return new Balssification(name,remark,[],localStorage.BalId);
     },
  
    add:function(pare,Child){
@@ -200,4 +200,60 @@ angular.module('starter.services', [])
   },
   }
  
+})
+
+.factory('BalManager', function() {
+  // Might use a resource here that returns a JSON array
+
+  // Some fake testing data
+  localStorage.BalId=localStorage.BalId || 0;
+ localStorage.BalData || (localStorage.BalData=angular.toJson([]));
+ let BalData=angular.fromJson(localStorage.BalData);
+
+ let synchronize=function(){
+     localStorage.BalData=angular.toJson(BalData);
+
+ }
+   
+   
+  return {
+
+    get: function() {     
+      return BalData;
+    },
+
+    create:function(name=``,classify,account,money,time=new Date().getDate,remark=``){
+        localStorage.BalId=Number(localStorage.BalId) +1;
+       return new Balssification(name,classify ,account,money,time,remark, localStorage.BalId);
+    },
+ 
+   add:function(item){
+           BalData.push(item);
+            synchronize();
+
+        },
+
+
+    remov:function(item){
+       BalData.splice( BalData.indexOf(item), 1);
+             synchronize();
+       
+    },
+
+
+    find:function(Id){
+        return BalData.find((element,index,array)=>Id===element.BalId);
+    },
+
+
+
+
+      moveItem:function(item, fromIndex, toIndex) {
+         BalData.splice(fromIndex, 1);
+         BalData.splice(toIndex, 0, item);
+         synchronize();
+  },
+  }
+ 
 });
+

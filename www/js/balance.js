@@ -1,8 +1,8 @@
 //balance.js
 'use strict';
  class BalManager{
-    constructor(classify ,account,money=0,time=new Date().getDate,remark=``,BlaCount=0){
-      
+    constructor(name=`test`,classify=null ,account=null,money=0,time=new Date().getDate,remark=``,BlaCount=0){
+        this.BalName=name;
         this.BalClassify=classify;
         this.BalAccount=account;
         this.BalMoney=money;

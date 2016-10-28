@@ -1,0 +1,67 @@
+
+<ion-view view-title="{{chat.name}}">
+
+    <ion-nav-title>
+				{{ current.AccName }}
+			</ion-nav-title>
+            <ion-nav-buttons side="primary">
+                <button class="button" ng-click="cancel()">
+                  cancel
+                </button>
+            </ion-nav-buttons>
+
+            <ion-nav-buttons side="secondary">
+          
+          <button class="button" ng-click="save()">
+           save
+        </button>
+   
+            </ion-nav-buttons>
+    
+
+
+<ion-content>
+<div class="list">
+  <label class="item item-input">
+    <span class="input-label">交易名</span>
+    <input type="text" ng-model="Bal.name">
+  </label>
+  <label class="item item-input">
+    <span class="input-label">金额</span>
+    <input type="number" ng-model="Bal.money">
+  </label>
+
+  <label class="item item-input item-select">
+    <div class="input-label">收支类型
+    </div>
+    <select ng-model="Bal.type">
+      <option value="1">收入</option>
+      <option value="-1">支出</option>
+    </select>
+  </label>
+ </label>
+  <label class="item item-input">
+    <span class="input-label">收支分类</span>
+   <select ng-model="Bal.classify">
+        <option ng-repeat="x in Account" value="{{x.Id}}">{{x.name}}</option>
+    </select>
+  </label>
+  </label>
+  <label class="item item-input">
+    <span class="input-label">账户</span>
+   <select ng-model="Bal.account">
+        <option ng-repeat="x in Account" value="{{x.Id}}">{{x.name}}</option>
+    </select>
+  </label>
+  <label class="item item-input">
+    <span class="input-label">时间</span>
+    <input type="text" ng-model="Bal.time">
+  </label>
+  <label class="item item-input">
+    <span class="input-label">备注</span>
+    <input type="text" ng-model="Bal.remark">
+  </label>
+</div>
+</ion-content>
+
+</ion-view>
