@@ -219,4 +219,6 @@ angular.module('starter.controllers', [])
    });
 };
 
+}).controller("caculator",function($scope){
+  
 });
