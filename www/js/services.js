@@ -5,7 +5,7 @@ angular.module('starter.services', [])
 
   // Some fake testing data
   localStorage.AccId=localStorage.AccId || 0;
- localStorage.AccData || (localStorage.AccData=angular.toJson(new Account("myself",100,"test",[],0)));
+ localStorage.AccData || (localStorage.AccData=angular.toJson(new Account(0,"myself",100,"test",[])));
     let synchronize=function(){
                     let temp={};
             angular.copy(AccData,temp);
@@ -44,19 +44,37 @@ angular.module('starter.services', [])
     },
 
     create:function(name=``,balance=0,remark=``){
-        localStorage.AccId=Number(localStorage.pAccId) +1;
-       return new Account(name,balance,remark,[],localStorage.AccId);
+        localStorage.AccId=Number(localStorage.AccId) +1;
+       return new Account(localStorage.AccId,name,balance,remark,[]);
     },
  
    add:function(pare,Child){
-
+       console.log(pare);
+        console.log(Child);
             Child.parent=pare;
             pare.Child.push(Child);
             synchronize();
 
         },
 
-
+        flattening:function(){
+                 let temp=new Set();
+           (function(pare){
+		pare.Child.i || (pare.Child.i=0);
+        temp.add(pare);
+			while(pare.Child.i < pare.Child.length){
+				let e = pare.Child[pare.Child.i];
+                temp.add(e);
+				if(e && e.Child.length > 0){
+					arguments.callee(e);
+				}
+	            pare.Child.i++ ;
+			}
+			pare.Child.i = null ;
+            return pare; 			
+	}(AccData));
+    return [...temp];
+ },
     remov:function(pare,item){
          pare.Child.splice( pare.Child.indexOf(item), 1);
              synchronize();
@@ -156,7 +174,7 @@ angular.module('starter.services', [])
 
     create:function(name=`test`,remark=`test`){
         localStorage.ClaId=Number(localStorage.ClaId) +1;
-       return new Classification(name,remark,[],localStorage.ClaId);
+       return new Classification(localStorage.ClaId,name,remark,[]);
     },
  
    add:function(pare,Child){
@@ -184,6 +202,24 @@ angular.module('starter.services', [])
         return pare.Child.find((element,index,array)=>Id===element.ClaId);
     },
 
+    flattening:function(){
+                 let temp=new Set();
+           (function(pare){
+		pare.Child.i || (pare.Child.i=0);
+        temp.add(pare);
+			while(pare.Child.i < pare.Child.length){
+				let e = pare.Child[pare.Child.i];
+                temp.add(e);
+				if(e && e.Child.length > 0){
+					arguments.callee(e);
+				}
+	            pare.Child.i++ ;
+			}
+			pare.Child.i = null ;
+            return pare; 			
+	}(ClaData));
+    return [...temp];
+ },
 
     update:function(pare,name = ``,remark = ``){
         pare.ClaName    = name;
@@ -224,9 +260,10 @@ angular.module('starter.services', [])
       return BalData;
     },
 
-    create:function(name=``,classify,account,money,time=new Date().getDate,remark=``){
-        localStorage.BalId=Number(localStorage.BalId) +1;
-       return new Classification(name,classify ,account,money,time,remark, localStorage.BalId);
+    create:function(name,classify,account,money,time,remark){
+        let id=Number(localStorage.BalId) +1;
+        localStorage.BalId=""+id;
+       return new BalManager(id,name,classify ,account,money,time,remark);
     },
  
    add:function(item){
@@ -235,20 +272,14 @@ angular.module('starter.services', [])
 
         },
 
-
     remov:function(item){
        BalData.splice( BalData.indexOf(item), 1);
-             synchronize();
-       
+             synchronize();      
     },
-
 
     find:function(Id){
         return BalData.find((element,index,array)=>Id===element.BalId);
     },
-
-
-
 
       moveItem:function(item, fromIndex, toIndex) {
          BalData.splice(fromIndex, 1);

@@ -1,8 +1,16 @@
 angular.module('starter.controllers', [])
 
-.controller('BalanceCtrl', function($scope,BalManager) {
-  $scope.Item=BalManager.get();
-  console.log($scope.Item);
+.controller('BalanceCtrl', function($scope,BalManager,Classify,Account) {
+   $scope.Classify=Classify.flattening();
+  $scope.Account=Account.flattening();
+  $scope.items=BalManager.get();
+  console.log($scope.items);
+   $scope.findAccount=function(Id){
+  console.log($scope.Account);
+    let temp=$scope.Account.find((element,index,array)=>Id===element.AccId);
+        return temp===void(0)?"null":temp.AccName;
+
+    }
 
    $scope.moveItem = function(item, fromIndex, toIndex) {
    BalManager.moveItem(item, fromIndex, toIndex);
@@ -12,21 +20,25 @@ angular.module('starter.controllers', [])
     BalManager.remov(item);
     
   };
-  $scope.add=function(){
-    alert(11);
-    console.log($location);
-    $location.path("/tab/create");
-  }
 
 })
-.controller('BalCreateCtrl', function($scope, BalManager) {
-
+.controller('BalCreateCtrl', function($scope,$state,BalManager,Classify,Account) {
+  $scope.Classify=Classify.flattening();
+  $scope.Account=Account.flattening();
   $scope.Item=BalManager.get();
   $scope.Bal=BalManager.create();
+  $scope.Bal.type="1";
+  $scope.Bal.BalTime=new Date();
+ 
   $scope.save=function(){
      BalManager.add($scope.Bal);
-     $state.go("balance");
+     $state.go("tab.balance");
+     
    }
+   $scope.myGoBack = function() {
+     alert("11122");
+    $state.go("tab.balance");
+  }
 
 })
 .controller('BalEditCtrl', function($scope,$stateParams,BalManager) {
@@ -48,7 +60,7 @@ angular.module('starter.controllers', [])
   //});
 
   $scope.Item = Account.get();
-  console.log($scope.Item);
+
   $scope.current=$scope.Item;
   $scope.items=$scope.current.Child;
   $scope.data = {
@@ -59,7 +71,7 @@ angular.module('starter.controllers', [])
   $scope.items=$scope.current.Child;
   }
   $scope.pre=function(item){
-  console.log(item);
+
     $scope.change(item.parent);
   }
 
@@ -73,7 +85,7 @@ angular.module('starter.controllers', [])
   };
     // 触发一个按钮点击，或一些其他目标
  $scope.edit = function(item) {
-   console.log(item);
+
    $scope.data = {};
    angular.copy(item,$scope.data);
    var myPopup = $ionicPopup.show({
@@ -106,7 +118,7 @@ angular.module('starter.controllers', [])
      ]
    });
    myPopup.then(function(res) {
-     console.log('Tapped!', res);
+
    });
 };
 
@@ -142,7 +154,6 @@ angular.module('starter.controllers', [])
      ]
    });
    myPopup.then(function(res) {
-     console.log('Tapped!', res);
    });
 };
 
@@ -159,7 +170,7 @@ angular.module('starter.controllers', [])
   //});
 
   $scope.Item = Classify.get();
-  console.log($scope.Item);
+
   $scope.current=$scope.Item;
   $scope.items=$scope.current.Child;
   $scope.data = {
@@ -170,7 +181,7 @@ angular.module('starter.controllers', [])
   $scope.items=$scope.current.Child;
   }
   $scope.pre=function(item){
-  console.log(item);
+
     $scope.change(item.parent);
   }
 
@@ -185,7 +196,7 @@ angular.module('starter.controllers', [])
 
     // 触发一个按钮点击，或一些其他目标
  $scope.edit = function(item) {
-   console.log(item);
+
    $scope.data = {};
    angular.copy(item,$scope.data);
    var myPopup = $ionicPopup.show({
@@ -214,7 +225,7 @@ angular.module('starter.controllers', [])
      ]
    });
    myPopup.then(function(res) {
-     console.log('Tapped!', res);
+
    });
 };
 
@@ -241,14 +252,14 @@ angular.module('starter.controllers', [])
          onTap: function(e) {
 
            let n=Classify.create($scope.data1.ClaName,$scope.data1.ClaRemark);
-           console.log(n);
+
            Classify.add(item,n);
            }
          },
      ]
    });
    myPopup.then(function(res) {
-     console.log('Tapped!', res);
+
    });
 };
 

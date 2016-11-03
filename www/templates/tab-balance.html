@@ -25,10 +25,8 @@
       
       <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
 
-        <ion-item ng-repeat="item in items" 
-                  item="item"
-                  href="#/balance/edit/{{item.BalId}}"  class="item-remove-animate">
-          {{ item.BalName }} 
+        <ion-item ng-repeat="item in items" item="item" href="#/balance/edit/{{item.BalId}}"  class="item-remove-animate">
+          {{item.BalName }} {{findAccount(item.BalAccount)}}
           <ion-delete-button class="ion-minus-circled" 
                              ng-click="onItemDelete(item)">
           </ion-delete-button>

@@ -3,20 +3,14 @@
 
     <ion-nav-title>
 				{{ current.AccName }}
-			</ion-nav-title>
-            <ion-nav-buttons side="primary">
-                <button class="button" ng-click="cancel()">
-                  cancel
-                </button>
-            </ion-nav-buttons>
+		</ion-nav-title>
+    <ion-nav-buttons side="primary">
+        <button class="button" ng-click="goBack()">cancel</button>
+    </ion-nav-buttons>
 
-            <ion-nav-buttons side="secondary">
-          
-          <button class="button" ng-click="save()">
-           save
-        </button>
-   
-            </ion-nav-buttons>
+    <ion-nav-buttons side="secondary">         
+        <button class="button" ng-click="save()">save</button>
+    </ion-nav-buttons>
     
 
 
@@ -24,11 +18,11 @@
 <div class="list">
   <label class="item item-input">
     <span class="input-label">交易名</span>
-    <input type="text" ng-model="Bal.name">
+    <input type="text" ng-model="Bal.BalName">
   </label>
   <label class="item item-input">
     <span class="input-label">金额</span>
-    <input type="number" ng-model="Bal.money">
+    <input type="number" ng-model="Bal.BalMoney">
   </label>
 
   <label class="item item-input item-select">
@@ -42,24 +36,24 @@
  </label>
   <label class="item item-input">
     <span class="input-label">收支分类</span>
-   <select ng-model="Bal.classify">
-        <option ng-repeat="x in Account" value="{{x.Id}}">{{x.name}}</option>
+   <select ng-model="Bal.BalClassify">
+        <option ng-repeat="x in Classify" value="{{x.ClaId}}">{{x.ClaName}}</option>
     </select>
   </label>
   </label>
   <label class="item item-input">
     <span class="input-label">账户</span>
-   <select ng-model="Bal.account">
-        <option ng-repeat="x in Account" value="{{x.Id}}">{{x.name}}</option>
+   <select ng-model="Bal.BalAccount">
+        <option ng-repeat="x in Account" value="{{x.AccId}}">{{x.AccName}}</option>
     </select>
   </label>
   <label class="item item-input">
     <span class="input-label">时间</span>
-    <input type="text" ng-model="Bal.time">
+    <input type="datetime-local" ng-model="Bal.BalTime">
   </label>
   <label class="item item-input">
     <span class="input-label">备注</span>
-    <input type="text" ng-model="Bal.remark">
+    <input type="text" ng-model="Bal.BalRemark">
   </label>
 </div>
 </ion-content>
