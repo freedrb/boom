@@ -7,7 +7,8 @@
         this.AccBanlace = AccBanlace;
         this.Accremark  = Accremark;
         this.Child   = Child;
-        
+        this.line=[];
         this.parent     =null;
+        this.line.push(AccCount);
     }
 }

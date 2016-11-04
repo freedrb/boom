@@ -45,13 +45,13 @@ angular.module('starter.services', [])
 
     create:function(name=``,balance=0,remark=``){
         localStorage.AccId=Number(localStorage.AccId) +1;
-       return new Account(localStorage.AccId,name,balance,remark,[]);
+       return new Account(+localStorage.AccId,name,+balance,remark,[]);
     },
  
    add:function(pare,Child){
-       console.log(pare);
-        console.log(Child);
+
             Child.parent=pare;
+           Child.line=pare.line.concat(Child.AccId);
             pare.Child.push(Child);
             synchronize();
 
@@ -123,7 +123,15 @@ angular.module('starter.services', [])
          synchronize();
   },
   
-				
+	incoexpenditure:function(item,money){
+        if(item.AccBanlace < money)
+        throw new Error("余额不足");
+        item.AccBanlace-=money;
+
+    },
+    income:function(item,money){
+            item.AccBanlace+=money;
+    }			
   }
  
 })
@@ -174,12 +182,13 @@ angular.module('starter.services', [])
 
     create:function(name=`test`,remark=`test`){
         localStorage.ClaId=Number(localStorage.ClaId) +1;
-       return new Classification(localStorage.ClaId,name,remark,[]);
+       return new Classification(+localStorage.ClaId,name,remark,[]);
     },
  
    add:function(pare,Child){
 
             Child.parent=pare;
+            Child.line=pare.line.concat(Child.ClaId);
             pare.Child.push(Child);
             synchronize();
 

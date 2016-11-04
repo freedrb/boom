@@ -5,8 +5,9 @@
         this.ClaName=ClaName;
         this.ClaRemark=ClaRemark;
         this.Child=Child;
-       
+        this.line=[];
         this.parent=null;
+        this.line.push(ClaCount);
     }
     
 }

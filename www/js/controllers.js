@@ -4,9 +4,9 @@ angular.module('starter.controllers', [])
    $scope.Classify=Classify.flattening();
   $scope.Account=Account.flattening();
   $scope.items=BalManager.get();
-  console.log($scope.items);
+  
    $scope.findAccount=function(Id){
-  console.log($scope.Account);
+
     let temp=$scope.Account.find((element,index,array)=>Id===element.AccId);
         return temp===void(0)?"null":temp.AccName;
 
@@ -22,6 +22,13 @@ angular.module('starter.controllers', [])
   };
 
 })
+
+.controller('Chart',function($scope,BalManager,Classify,Account){
+$scope.Classify=Classify.flattening();
+  $scope.Account=Account.flattening();
+  $scope.Item=BalManager.get();
+})
+
 .controller('BalCreateCtrl', function($scope,$state,BalManager,Classify,Account) {
   $scope.Classify=Classify.flattening();
   $scope.Account=Account.flattening();
@@ -35,8 +42,7 @@ angular.module('starter.controllers', [])
      $state.go("tab.balance");
      
    }
-   $scope.myGoBack = function() {
-     alert("11122");
+   $scope.myGoBack = function(){
     $state.go("tab.balance");
   }
 
@@ -158,7 +164,6 @@ angular.module('starter.controllers', [])
 };
 
 })
-
 
 .controller('ClassifyCtrl', function($scope,$ionicPopup, $timeout, Classify) {
   // With the new view caching in Ionic, Controllers are only called
